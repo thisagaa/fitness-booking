@@ -1,16 +1,16 @@
+import type { FitnessClass } from "../types/FitnessClass"
+
 interface ClassCardProps{
-  title: string
-  teacher: string
-  capacity: number
+  fitnessClass: FitnessClass
 }
 
-function ClassCard({ title, teacher, capacity }: ClassCardProps) {
+function ClassCard({ fitnessClass }: ClassCardProps) {
 
   return (
     <article>
-      <h2>{title}</h2>
-      <p>Teacher: {teacher}</p>
-      <p>Capacity: {capacity} people</p>
+      <h2>{fitnessClass.title}</h2>
+      <p>Teacher: {fitnessClass.teacher}</p>
+      <p>Capacity: {fitnessClass.capacity} people</p>
     </article>
   )
 }
