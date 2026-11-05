@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "Aerobics",
+    "teacher": "Kenneth",
+    "capacity": 10
+  },
+  {
+    "id": 2,
+    "title": "Yoga",
+    "teacher": "Jess",
+    "capacity": 13
+  },
+  {
+    "id": 3,
+    "title": "Zumba",
+    "teacher": "Natalie",
+    "capacity": 20
+  },
+  {
+    "id": 4,
+    "title": "Karate",
+    "teacher": "Yoong",
+    "capacity": 15
+  },
+    {
+    "id": 5,
+    "title": "Swimming",
+    "teacher": "Alex",
+    "capacity": 12
+  },
+  {
+    "id": 6,
+    "title": "Pilates",
+    "teacher": "Maya",
+    "capacity": 15
+  },
+  {
+    "id": 7,
+    "title": "Boxing",
+    "teacher": "Daniel",
+    "capacity": 10
+  },
+  {
+    "id": 8,
+    "title": "Spin",
+    "teacher": "Priya",
+    "capacity": 18
+  },
+  {
+    "id": 9,
+    "title": "Dance Fitness",
+    "teacher": "Leo",
+    "capacity": 20
+  },
+  {
+    "id": 10,
+    "title": "Strength Training",
+    "teacher": "Aisha",
+    "capacity": 12
+  },
+  {
+    "id": 11,
+    "title": "Cycling",
+    "teacher": "Robert",
+    "capacity": 8
+  }
+]

@@ -1,16 +1,23 @@
 import ClassCard from "./components/ClassCard"
 import type { FitnessClass } from './types/FitnessClass'
-import { useState } from 'react'
-
-const classes: FitnessClass[] = [
-  { id: 1, title: 'Aerobics', teacher: 'Kenneth', capacity: 10},
-  { id: 2, title: 'Yoga', teacher: 'Jess', capacity: 13},
-  { id: 3, title: 'Zumba', teacher: 'Natalie', capacity: 20},
-  { id: 4, title: 'Karate', teacher: 'Yoong', capacity: 15},
-]
+import { useEffect, useState } from 'react'
+import { getClasses } from "./services/classService"
 
 function App() {
+  const [classes, setClasses] = useState<FitnessClass[]>([])
   const [search, setSearch] = useState('') //search holds the current search text, set search updates it, '' starts it empty
+  useEffect(() => {
+    async function loadClasses() {
+      try {
+        const data = await getClasses()
+        setClasses(data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    void loadClasses()
+  }, [])
   const filteredClasses = classes.filter((fitnessClass) =>
     fitnessClass.title.toLowerCase().includes(search.toLowerCase())
   )
