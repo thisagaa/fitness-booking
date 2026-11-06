@@ -6,6 +6,9 @@ import { getClasses } from "./services/classService"
 function App() {
   const [classes, setClasses] = useState<FitnessClass[]>([])
   const [search, setSearch] = useState('') //search holds the current search text, set search updates it, '' starts it empty
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
   useEffect(() => {
     async function loadClasses() {
       try {
@@ -13,6 +16,9 @@ function App() {
         setClasses(data)
       } catch (error) {
         console.error(error)
+        setError('Unable to load classes. Please refresh and try again.')
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -21,6 +27,25 @@ function App() {
   const filteredClasses = classes.filter((fitnessClass) =>
     fitnessClass.title.toLowerCase().includes(search.toLowerCase())
   )
+
+  if (isLoading) {
+    return (
+      <main>
+        <h1>Fitness Class Booking</h1>
+        <p role="status">Loading classes...</p>
+      </main>
+    )
+  }
+
+  if(error) {
+    return(
+      <main>
+        <h1>Fitness Class Booking</h1>
+        <p role="alert">{error}</p>
+      </main>
+    )
+  }
+
   return (
     <main>
       <h1>Fitness Class Booking</h1>
