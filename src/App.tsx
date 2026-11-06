@@ -2,6 +2,8 @@ import ClassCard from "./components/ClassCard"
 import type { FitnessClass } from './types/FitnessClass'
 import { useEffect, useState } from 'react'
 import { getClasses } from "./services/classService"
+import LoadingMessage from "./components/LoadingMessage"
+import ErrorMessage from "./components/ErrorMessage"
 
 function App() {
   const [classes, setClasses] = useState<FitnessClass[]>([])
@@ -32,7 +34,7 @@ function App() {
     return (
       <main>
         <h1>Fitness Class Booking</h1>
-        <p role="status">Loading classes...</p>
+        <LoadingMessage message="Loading classes..." />
       </main>
     )
   }
@@ -41,7 +43,7 @@ function App() {
     return(
       <main>
         <h1>Fitness Class Booking</h1>
-        <p role="alert">{error}</p>
+        <ErrorMessage message={error}/>
       </main>
     )
   }
@@ -57,7 +59,10 @@ function App() {
         value={search} //displays the current state
         onChange={(event) => setSearch(event.target.value)}
       />
-      {filteredClasses.length === 0 && (
+      {classes.length === 0 && (
+        <p>No classes are available yet.</p>
+      )}
+      {classes.length > 0 && filteredClasses.length === 0 && (
         <p>No classes match your search</p>
       )}
       {filteredClasses.map((item) => (
