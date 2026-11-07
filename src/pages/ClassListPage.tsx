@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { getClasses } from "../services/classService"
 import LoadingMessage from "../components/LoadingMessage"
 import ErrorMessage from "../components/ErrorMessage"
+import { Link } from 'react-router-dom'
+
 
 function ClassListPage() {
   const [classes, setClasses] = useState<FitnessClass[]>([])
@@ -66,10 +68,9 @@ function ClassListPage() {
         <p>No classes match your search</p>
       )}
       {filteredClasses.map((item) => (
-        <ClassCard 
-          key={item.id}
-          fitnessClass={item}
-        />
+        <Link key={item.id} to={`/classes/${item.id}`}>
+          <ClassCard fitnessClass={item}/>
+        </Link>
       ))}
     </main>
   )

@@ -11,3 +11,15 @@ export async function getClasses(): Promise<FitnessClass[]> {
 
   return response.json()
 }
+
+export async function getClass(id: number): Promise<FitnessClass> {
+  const classes = await getClasses()
+  const fitnessClass = classes.find((item) => item.id === id)
+
+  if(!fitnessClass) {
+    throw new Error('Class not found.')
+
+  }
+
+  return fitnessClass
+}
