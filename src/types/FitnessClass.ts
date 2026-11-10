@@ -4,3 +4,5 @@ export interface FitnessClass {
   teacher: string
   capacity: number
 }
+
+export type NewClassInput = Omit<FitnessClass, 'id'>

@@ -54,6 +54,7 @@ function ClassListPage() {
     <main>
       <h1>Fitness Class Booking</h1>
       <p>Welcome to your Fitness class!</p>
+      <Link to="/classes/new">Create a class</Link>
       <label htmlFor="class-search">Search classes</label>
       <input 
         id="class-search"

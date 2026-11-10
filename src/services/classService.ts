@@ -1,6 +1,12 @@
-import type { FitnessClass } from '../types/FitnessClass'
+import type { FitnessClass, NewClassInput } from '../types/FitnessClass'
+
+let classes: FitnessClass[] | null = null //one shared list. Every call to getClasses() fetches a fresh copy of the JSON. A class added to one copy would dissapear when another page fetched the file again
 
 export async function getClasses(): Promise<FitnessClass[]> {
+  if (classes !== null) {
+    return classes
+  }
+  
   const response = await fetch(
     `${import.meta.env.BASE_URL}data/classes.json`
   )
@@ -9,7 +15,9 @@ export async function getClasses(): Promise<FitnessClass[]> {
     throw new Error('Unable to load classes')
   }
 
-  return response.json()
+  const data: FitnessClass[] = await response.json()
+  classes ??= data
+  return classes
 }
 
 export async function getClass(id: number): Promise<FitnessClass> {
@@ -22,4 +30,13 @@ export async function getClass(id: number): Promise<FitnessClass> {
   }
 
   return fitnessClass
+}
+
+export async function createClass(input: NewClassInput): Promise<FitnessClass> {
+  const list = await getClasses()
+  const highestId = list.reduce((highest, item)=> Math.max(highest, item.id), 0)
+  const newClass: FitnessClass = {...input, id: highestId + 1}
+
+  list.push(newClass)
+  return newClass
 }
