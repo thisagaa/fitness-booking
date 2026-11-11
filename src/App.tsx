@@ -5,6 +5,8 @@ import NotFoundPage from "./pages/NotFoundPage"
 import Layout from './components/Layout'
 import ClassDetailPage from "./pages/ClassDetailPage"
 import CreateClassPage from "./pages/CreateClassPage"
+import EditClassPage from "./pages/EditClassPage"
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
           <Route path="/classes/:id" element={<ClassDetailPage />} />
           <Route path="/classes/new" element={<CreateClassPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/classes/:id/edit" element={<EditClassPage />} />
         </Route>
       </Routes>
     </HashRouter>

@@ -40,3 +40,19 @@ export async function createClass(input: NewClassInput): Promise<FitnessClass> {
   list.push(newClass)
   return newClass
 }
+
+export async function updateClass(
+  id:number,
+  input: NewClassInput,
+): Promise<FitnessClass> {
+  const list = await getClasses()
+  const index = list.findIndex((item)=> item.id === id)
+
+  if (index === -1) {
+    throw new Error('Class not found.')
+  }
+
+  const updatedClass: FitnessClass = {...input, id}
+  list[index] = updatedClass
+  return updatedClass
+}

@@ -5,7 +5,7 @@ import { getClass } from "../services/classService";
 import ClassCard from "../components/ClassCard";
 import ErrorMessage from "../components/ErrorMessage";
 import LoadingMessage from "../components/LoadingMessage";
-
+import { Link } from "react-router-dom";
 
 function ClassDetailPage() {
   const { id } = useParams()
@@ -45,6 +45,9 @@ function ClassDetailPage() {
       )}
       {error && <ErrorMessage message={error} />}
       {fitnessClass && <ClassCard fitnessClass={fitnessClass} />}
+      {fitnessClass && (
+        <Link to={`/classes/${fitnessClass.id}/edit`}>Edit class</Link>
+      )}
     </main>
   )
 }
