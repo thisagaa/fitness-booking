@@ -6,11 +6,14 @@ import ClassCard from "../components/ClassCard";
 import ErrorMessage from "../components/ErrorMessage";
 import LoadingMessage from "../components/LoadingMessage";
 import { Link } from "react-router-dom";
+import { deleteClass } from "../services/classService";
+import { useNavigate } from "react-router-dom";
 
 function ClassDetailPage() {
   const { id } = useParams()
   const [fitnessClass, setFitnessClass] = useState<FitnessClass | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     let ignore = false  //prevents an old request from updating the page
@@ -47,6 +50,25 @@ function ClassDetailPage() {
       {fitnessClass && <ClassCard fitnessClass={fitnessClass} />}
       {fitnessClass && (
         <Link to={`/classes/${fitnessClass.id}/edit`}>Edit class</Link>
+      )}
+
+      {fitnessClass && (
+        <button
+          type="button"
+          onClick={async () =>{
+            const confirmed = window.confirm(`Are you sure you want to delete ${fitnessClass.title}`)
+            if(!confirmed) return
+
+            try {
+              await deleteClass(fitnessClass.id)
+              navigate('/classes')
+            } catch{
+              setError('Unable to delete this class. Please try again.')
+            }
+          }}
+          >
+            Delete class
+          </button>
       )}
     </main>
   )

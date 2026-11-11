@@ -56,3 +56,14 @@ export async function updateClass(
   list[index] = updatedClass
   return updatedClass
 }
+
+export async function deleteClass(id: number): Promise<void> {
+  const list = await getClasses()
+  const index = list.findIndex((item) => item.id === id)
+
+  if (index === -1) {
+    throw new Error('Class not found')
+  }
+
+  list.splice(index, 1)
+}
