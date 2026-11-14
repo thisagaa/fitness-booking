@@ -8,12 +8,15 @@ import LoadingMessage from "../components/LoadingMessage";
 import { Link } from "react-router-dom";
 import { deleteClass } from "../services/classService";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
+
 
 function ClassDetailPage() {
   const { id } = useParams()
   const [fitnessClass, setFitnessClass] = useState<FitnessClass | null>(null)
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
+  const token = useAuthStore((state) => state.token)
 
   useEffect(() => {
     let ignore = false  //prevents an old request from updating the page
@@ -52,7 +55,7 @@ function ClassDetailPage() {
         <Link to={`/classes/${fitnessClass.id}/edit`}>Edit class</Link>
       )}
 
-      {fitnessClass && (
+      {fitnessClass && token && (
         <button
           type="button"
           onClick={async () =>{

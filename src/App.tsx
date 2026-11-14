@@ -6,6 +6,8 @@ import Layout from './components/Layout'
 import ClassDetailPage from "./pages/ClassDetailPage"
 import CreateClassPage from "./pages/CreateClassPage"
 import EditClassPage from "./pages/EditClassPage"
+import LoginPage from './pages/LoginPage'
+import RequireAuth from "./components/RequireAuth"
 
 
 function App() {
@@ -16,9 +18,12 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/classes" element={<ClassListPage />} />
           <Route path="/classes/:id" element={<ClassDetailPage />} />
-          <Route path="/classes/new" element={<CreateClassPage />} />
           <Route path="*" element={<NotFoundPage />} />
-          <Route path="/classes/:id/edit" element={<EditClassPage />} />
+          <Route path="/login" element = {<LoginPage />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/classes/new" element={<CreateClassPage />} />
+            <Route path="/classes/:id/edit" element={<EditClassPage />} />
+          </Route>
         </Route>
       </Routes>
     </HashRouter>
