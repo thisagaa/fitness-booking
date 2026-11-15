@@ -30,3 +30,8 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+
+## Testing
+
+The testing system used is vitest and React Testing Library. npm test runs the written tests. Vitest runs in a jsdom environment. The tests cover class card rendering, successful and failed data loads, and creating a class and reading it back.
