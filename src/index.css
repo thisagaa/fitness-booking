@@ -109,3 +109,31 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+
+.class-list-controls {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 28rem;
+  margin: 1rem auto;
+  padding-inline: 1rem;
+}
+
+.form-stack {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 28rem;
+  margin: 1rem auto;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.class-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}

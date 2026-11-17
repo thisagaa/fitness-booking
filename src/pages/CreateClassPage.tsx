@@ -18,7 +18,7 @@ function CreateClassPage() {
     <main>
       <h1>Create a class</h1>
       <p>Changes are temporary. Refreshing the page restores the original class list.</p>
-      <form
+      <form  className="form-stack"
         onSubmit={ async (event) => {
           event.preventDefault()
           setSaveError('')

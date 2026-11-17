@@ -51,6 +51,7 @@ function ClassDetailPage() {
       )}
       {error && <ErrorMessage message={error} />}
       {fitnessClass && <ClassCard fitnessClass={fitnessClass} />}
+      <div className="class-detail-actions">
       {fitnessClass && (
         <Link to={`/classes/${fitnessClass.id}/edit`}>Edit class</Link>
       )}
@@ -73,6 +74,7 @@ function ClassDetailPage() {
             Delete class
           </button>
       )}
+      </div>
     </main>
   )
 }

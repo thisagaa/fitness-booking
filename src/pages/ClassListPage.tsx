@@ -54,14 +54,17 @@ function ClassListPage() {
     <main>
       <h1>Fitness Class Booking</h1>
       <p>Welcome to your Fitness class!</p>
-      <Link to="/classes/new">Create a class</Link>
-      <label htmlFor="class-search">Search classes</label>
-      <input 
-        id="class-search"
-        type="search"
-        value={search} //displays the current state
-        onChange={(event) => setSearch(event.target.value)}
-      />
+      <div className="class-list-controls">
+        <Link to="/classes/new">Create a class</Link>
+        <label htmlFor="class-search">Search classes</label>
+        <input 
+          id="class-search"
+          type="search"
+          value={search} //displays the current state
+          onChange={(event) => setSearch(event.target.value)}
+        />
+
+      </div>
       {classes.length === 0 && (
         <p>No classes are available yet.</p>
       )}

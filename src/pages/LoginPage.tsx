@@ -13,7 +13,7 @@ function LoginPage() {
   return (
     <main>
       <h1>Log in</h1>
-      <form onSubmit={(event) => { event.preventDefault() 
+      <form className="form-stack" onSubmit={(event) => { event.preventDefault() 
         if (username.trim() !== 'user' || password !== 'user123'){
           setLoginError('Incorrect username or password.')
           return
