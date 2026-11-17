@@ -60,6 +60,7 @@ function CreateClassPage() {
       >
         <label htmlFor="class-title">Class title</label>
         <input
+          className="form-control"
           id="class-title"
           value={title}
           onChange={(event) =>
@@ -69,6 +70,7 @@ function CreateClassPage() {
 
         <label htmlFor="class-teacher">Class teacher</label>
         <input 
+          className="form-control"
           id="class-teacher"
           value={teacher}
           onChange={(event) => 
@@ -78,6 +80,7 @@ function CreateClassPage() {
 
         <label htmlFor="class-capacity">Capacity</label>
         <input 
+          className="form-control"
           id="class-capacity"
           type="number"
           value={capacity}
@@ -88,7 +91,7 @@ function CreateClassPage() {
 
         {capacityError && <ErrorMessage message= {capacityError} />}
         {saveError && <ErrorMessage message= {saveError} />}
-        <button type="submit">Create class</button>
+        <button type="submit" className="btn btn-primary">Create class</button>
       </form>
     </main>
   )

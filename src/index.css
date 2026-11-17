@@ -137,3 +137,9 @@ code {
   gap: 0.75rem;
   margin-block: 1rem;
 }
+
+.class-card-link:hover .card,
+.class-card-link:focus-visible .card {
+  outline: 2px solid var(--bs-primary-text-emphasis);
+  outline-offset: 2px;
+}

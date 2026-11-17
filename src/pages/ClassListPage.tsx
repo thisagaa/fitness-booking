@@ -55,9 +55,12 @@ function ClassListPage() {
       <h1>Fitness Class Booking</h1>
       <p>Welcome to your Fitness class!</p>
       <div className="class-list-controls">
-        <Link to="/classes/new">Create a class</Link>
+        <Link className="btn btn-primary" to="/classes/new">
+          Create a class
+        </Link>
         <label htmlFor="class-search">Search classes</label>
         <input 
+          className="form-control"
           id="class-search"
           type="search"
           value={search} //displays the current state
@@ -71,11 +74,15 @@ function ClassListPage() {
       {classes.length > 0 && filteredClasses.length === 0 && (
         <p>No classes match your search</p>
       )}
-      {filteredClasses.map((item) => (
-        <Link key={item.id} to={`/classes/${item.id}`}>
-          <ClassCard fitnessClass={item}/>
-        </Link>
-      ))}
+      <div className="row row-cols-1 row-cols-md-3 g-3 mx-0">
+        {filteredClasses.map((item) => (
+          <div className="col" key={item.id}>
+            <Link className="class-card-link text-decoration-none d-block" to={`/classes/${item.id}`}>
+              <ClassCard fitnessClass={item}/>
+            </Link>
+          </div>
+        ))}
+      </div>
     </main>
   )
 }

@@ -27,6 +27,7 @@ function LoginPage() {
       >
         <label htmlFor="login-username">Username</label>
         <input
+          className="form-control"
           id="login-username"
           autoComplete="username"
           value={username}
@@ -35,6 +36,7 @@ function LoginPage() {
 
         <label htmlFor="login-password">Password</label>
         <input 
+          className="form-control"
           type="password"
           id="login-password"
           autoComplete="current-password"
@@ -43,7 +45,7 @@ function LoginPage() {
         />
 
         {loginError && <ErrorMessage message={loginError} />}
-        <button type="submit">Log in</button>
+        <button type="submit" className="btn btn-primary">Log in</button>
 
       </form>
     </main>

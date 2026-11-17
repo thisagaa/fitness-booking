@@ -76,33 +76,33 @@ function EditClassPage(){
 
       <label htmlFor="edit-class-title">Class title</label>
       <input 
+        className="form-control"
         id="edit-class-title"
         value={title}
         onChange={(event) =>
         setTitle(event.target.value)}
-
       />
 
       <label htmlFor="edit-class-teacher">Teacher</label>
       <input
+        className="form-control"
         id="edit-class-teacher"
         value={teacher}
         onChange={(event) => setTeacher(event.target.value)}
-
       />
 
       <label htmlFor="edit-class-capacity">Capacity</label>
       <input
+        className="form-control"
         id="edit-class-capacity"
         value={capacity}
         type="number"
         onChange={(event) => setCapacity(event.target.value)}
-
       />
 
       {validationError && <ErrorMessage message={validationError} />}
 
-      <button type="submit" disabled={loadedClassId !== id}>Save changes</button>
+      <button className="btn btn-primary" type="submit" disabled={loadedClassId !== id}>Save changes</button>
 
       </form>
     </main>

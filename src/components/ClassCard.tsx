@@ -7,7 +7,7 @@ interface ClassCardProps{
 function ClassCard({ fitnessClass }: ClassCardProps) {
 
   return (
-    <article>
+    <article className="card p-3 text-start">
       <h2>{fitnessClass.title}</h2>
       <p>Teacher: {fitnessClass.teacher}</p>
       <p>Capacity: {fitnessClass.capacity} people</p>
