@@ -1,6 +1,8 @@
 import type { FitnessClass, NewClassInput } from '../types/FitnessClass'
 
 let classes: FitnessClass[] | null = null //one shared list. Every call to getClasses() fetches a fresh copy of the JSON. A class added to one copy would dissapear when another page fetched the file again
+const bookedClassIds = new Set<number>()
+
 
 export async function getClasses(): Promise<FitnessClass[]> {
   if (classes !== null) {
@@ -66,4 +68,30 @@ export async function deleteClass(id: number): Promise<void> {
   }
 
   list.splice(index, 1)
+  bookedClassIds.delete(id)
+}
+
+
+export async function bookClass(id: number): Promise<void> {
+  const fitnessClass = await getClass(id)
+
+  if(bookedClassIds.has(id)) {
+    throw new Error('You already booked this class.')
+  }
+
+  if(fitnessClass.capacity < 1) {
+    throw new Error('This class is full.')
+  }
+
+  bookedClassIds.add(id)
+}
+
+export async function cancelBooking(id: number): Promise<void> {
+  if(!bookedClassIds.delete(id)) {
+    throw new Error('You have not booked this class.')
+  }
+}
+
+export function isClassBooked(id: number): boolean {
+  return bookedClassIds.has(id)
 }

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import {useEffect, useState} from 'react'
 import type { FitnessClass } from "../types/FitnessClass";
-import { getClass } from "../services/classService";
+import { getClass, isClassBooked, bookClass, cancelBooking } from "../services/classService";
 import ClassCard from "../components/ClassCard";
 import ErrorMessage from "../components/ErrorMessage";
 import LoadingMessage from "../components/LoadingMessage";
@@ -10,13 +10,13 @@ import { deleteClass } from "../services/classService";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
-
 function ClassDetailPage() {
   const { id } = useParams()
   const [fitnessClass, setFitnessClass] = useState<FitnessClass | null>(null)
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
   const token = useAuthStore((state) => state.token)
+  const [isBooked, setIsBooked] = useState(false)
 
   useEffect(() => {
     let ignore = false  //prevents an old request from updating the page
@@ -26,7 +26,10 @@ function ClassDetailPage() {
     async function loadClass() {
       try {
         const data = await getClass(Number(id))
-        if(!ignore) setFitnessClass(data)
+        if(!ignore) {
+          setFitnessClass(data)
+          setIsBooked(isClassBooked(data.id))
+        }
       } catch (error) {
         if(!ignore) {
           console.error(error)
@@ -51,6 +54,57 @@ function ClassDetailPage() {
       )}
       {error && <ErrorMessage message={error} />}
       {fitnessClass && <ClassCard fitnessClass={fitnessClass} />}
+      {fitnessClass && (
+        <p className="m-2">
+          Spots available: {Math.max(0, fitnessClass.capacity - (isBooked ? 1 : 0))}
+        </p>
+      )}
+        {fitnessClass && token && !isBooked && (
+          <button 
+            type="button"
+            className="btn btn-primary"
+            disabled={fitnessClass.capacity < 1}
+            onClick={async () => {
+              setError(null)
+
+              try {
+                await bookClass(fitnessClass.id)
+                setIsBooked(true)
+              } catch (error) {
+                setError(error instanceof Error ? error.message : 'Unable to book this class.')
+
+              }
+            }}
+            >
+              {fitnessClass.capacity < 1 ? 'Class full' : 'Book a spot'}
+            </button>
+        )}
+        {fitnessClass && token && isBooked && (
+          <button 
+            type="button"
+            className="btn btn-outline-light"
+            onClick={async ()=> {
+              setError(null)
+
+              try {
+                await cancelBooking(fitnessClass.id)
+                setIsBooked(false)
+              } catch {
+                setError('Unable to cancel this booking. Please try again.')
+              }
+            }}
+            >
+              Cancel booking
+            </button>
+        )}
+        {token && (
+          <p className="small text-body-secondary mt-2">
+            Bookings reset when you refresh the page.
+          </p>
+        )}
+        
+        
+      
       <div className="class-detail-actions">
       {fitnessClass && (
         <Link to={`/classes/${fitnessClass.id}/edit`}>Edit class</Link>
