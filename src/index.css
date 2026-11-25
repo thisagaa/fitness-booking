@@ -143,3 +143,25 @@ code {
   outline: 2px solid var(--bs-primary-text-emphasis);
   outline-offset: 2px;
 }
+
+.home-hero {
+  flex: 1;
+  padding: 3rem 1rem;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  background-color: #212529;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.home-hero h1 {
+  color: inherit;
+}
+
+#root:has(.home-hero) {
+  width: 100%;
+  border-inline: 0;
+}
